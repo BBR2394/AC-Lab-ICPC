@@ -1,0 +1,27 @@
+P Smalltalk programming computers P computers programming
+P computers Smalltalk
+P FORTRAN programming
+P COBOL programming
+P programming
+Q Smalltalk
+Q programming
+Q computers
+Q Smalltalk computers
+Q Smalltalk programming Q cooking French
+E# -*- coding: utf-8 -*-
+# @Author: Baptiste Bertrand-Rapello
+# @Date:   2020-03-02 15:32:07
+# @Last Modified by:   Baptiste Bertrand-Rapello
+# @Last Modified time: 2020-03-02 15:36:28
+
+import sys
+
+#def getInputInList():
+
+
+def main():
+    print("Here is where the magik happened 98D")
+
+main()
+
+print(sys.argv)
