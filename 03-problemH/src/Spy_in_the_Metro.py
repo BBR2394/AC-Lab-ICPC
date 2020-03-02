@@ -3,10 +3,14 @@ class Station:
                  stationA, stationAT, stationB, stationBT):
         self.nbStation = nbStation
         self.adj = {stationA: stationAT, stationB: stationBT}
+<<<<<<< HEAD
         if type(trains) is dict :
             self.trains = trains
         else:
             self.trains = [int(horaires.split()[x]) for x in range(trains)]
+=======
+        self.trains = [int(horaires.split()[x]) for x in range(trains)]
+>>>>>>> 03-PBH
 
     def __str__(self):
         return "Station N : " + str(self.nbStation) \
@@ -29,6 +33,7 @@ class Graphe:
         message += "Et comme temps : " + str(self.time)
         return message
 
+<<<<<<< HEAD
     def calcule_horaires(self):
         self.calcule_D_F()
         self.calcule_F_D()
@@ -50,6 +55,10 @@ class Graphe:
             station = self.ladj[x]
             stationA = self.ladj[x - 1]
             station.trains[x - 1] = [int(h) + int(station.adj[x + 1]) for h in stationA.trains[x]]
+=======
+    def calcule_horaire(self):
+        pass
+>>>>>>> 03-PBH
 
 
 def lire_graphe():
