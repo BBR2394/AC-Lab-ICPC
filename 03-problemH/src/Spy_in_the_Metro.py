@@ -1,18 +1,32 @@
+"""
+Les Station sont les somets du Graphe
+"""
+
+
 class Station:
     def __init__(self, nbStation, trains, horaires,
                  stationA, stationAT, stationB, stationBT):
         self.nbStation = nbStation
         self.adj = {stationA: stationAT, stationB: stationBT}
-        if type(trains) is dict :
+        if type(trains) is dict:
             self.trains = trains
         else:
             self.trains = [int(horaires.split()[x]) for x in range(trains)]
-
+        self.horaireTerminus = None
 
     def __str__(self):
-        return "Station N : " + str(self.nbStation) \
-               + "\nAdj : " + str(self.adj) \
-               + "\nHoraire :" + str(self.trains)
+        message = "Station N : " + str(self.nbStation) \
+                  + "\nAdj : " + str(self.adj) \
+                  + "\nHoraire :" + str(self.trains)
+        if self.horaireTerminus:
+            message += "\nHoraire Terminus :" + str(self.horaireTerminus)
+        return message
+
+
+"""
+Class Graphe  qui pertmet de remrensenter  la ligne de metro
+Cette classe contiendra les methode pour calculer le resulta
+"""
 
 
 class Graphe:
@@ -26,13 +40,19 @@ class Graphe:
 
     def __str__(self):
         message = "Le graphe et d'ordre : " + str(self.ordre) + "\n"
-        message += "il a comme liste d'adjacence : " + str([str(station) for station in self.ladj]) + "\n"
+        message += "il a comme liste d'adjacence : \n"
+        for station in self.ladj:
+            message += str(station) + "\n\n"
         message += "Et comme temps : " + str(self.time)
         return message
 
     def calcule_horaires(self):
         self.calcule_D_F()
         self.calcule_F_D()
+
+    """
+    Methode qui calculer les horaire des trains dans le sens Debut -> Fin 
+    """
 
     def calcule_D_F(self):
         station = self.ladj[1]
@@ -43,15 +63,30 @@ class Graphe:
             stationA = self.ladj[x - 1]
             station.trains[x + 1] = [int(h) + int(station.adj[x - 1]) for h in stationA.trains[x]]
 
+        x = len(self.ladj) - 1
+        station = self.ladj[x]
+        stationA = self.ladj[x - 1]
+        station.horaireTerminus = [int(h) + int(station.adj[x - 1]) for h in stationA.trains[x]]
+
+    """
+    Methode qui calculer les horaire des trains dans le sens Fin -> Debut 
+    """
+
     def calcule_F_D(self):
         station = self.ladj[self.ordre - 2]
         stationB = self.ladj[self.ordre - 1]
         station.trains[self.ordre - 3] = [int(h) + int(station.adj[self.ordre - 1]) for h in stationB.trains]
-        for x in range(self.ordre - 2, 1, - 1):
+        for x in range(self.ordre - 3, 0, - 1):
             station = self.ladj[x]
-            stationA = self.ladj[x - 1]
-            station.trains[x - 1] = [int(h) + int(station.adj[x + 1]) for h in stationA.trains[x]]
+            stationB = self.ladj[x + 1]
+            station.trains[x - 1] = [int(h) + int(station.adj[x + 1]) for h in stationB.trains[x]]
 
+
+"""
+Function qui transforme le fichier metro.io en Graphe Non Orianter
+
+:return: Graphe
+"""
 
 
 def lire_graphe():
@@ -66,11 +101,16 @@ def lire_graphe():
         heurDepart = lignes.pop(0)
         nbTrainGarN = int(lignes.pop(0))
         heurDepartGarN = lignes.pop(0)
-
+        """
+        On calcule dabord les stations 0 et N 
+        """
         stationStart = Station(0, nbTrain, heurDepart, None, None, 2, tmpTrajet[0])
         stationEnd = Station(nbStation - 1, nbTrainGarN, heurDepartGarN, nbStation - 2, tmpTrajet[nbStation - 2], None,
                              None)
         ladj = [stationStart]
+        """
+        On calcule les stations de 1 a N-1 
+        """
         for numero in range(1, nbStation - 1):
             ladj.append(
                 Station(numero, {}, None, numero - 1, tmpTrajet[numero - 1], numero + 1, tmpTrajet[numero]))
