@@ -3,7 +3,7 @@ class Station:
                 stationA, stationAT, stationB, stationBT):
         self.nbStation = nbStation
         self.adj = {stationA: stationAT, stationB: stationBT}
-        self.trains = [horaires[x] for x in range(trains)]
+        self.trains = [int(horaires.split()[x]) for x in range(trains)]
 
     def __str__(self):
         return "Station N : " + str(self.nbStation) \
@@ -25,6 +25,9 @@ class Graphe:
         message += "il a comme liste d'adjacence : " + str([str(station) for station in self.ladj]) + "\n"
         message += "Et comme temps : " + str(self.time)
         return message
+
+    def calcule_horaire(self):
+        pass
 
 
 def lire_graphe():
