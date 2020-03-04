@@ -1,4 +1,5 @@
-P Smalltalk programming computers P computers programming
+P Smalltalk programming computers 
+P computers programming
 P computers Smalltalk
 P FORTRAN programming
 P COBOL programming
@@ -7,5 +8,6 @@ Q Smalltalk
 Q programming
 Q computers
 Q Smalltalk computers
-Q Smalltalk programming Q cooking French
+Q Smalltalk programming 
+Q cooking French
 E
