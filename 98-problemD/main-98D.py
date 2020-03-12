@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:32:07
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-03-04 17:29:04
+# @Last Modified time: 2020-03-05 09:47:31
 
 import sys
 
@@ -169,16 +169,16 @@ def main():
 
     printResult(dicoList)
     return 0
-    queryOne = Query(Nmax, ['Smalltalk', 'computers'])
-    queryTwo = Query(Nmax, ['Smalltalk', 'programming'])
-    queryThree = Query(Nmax, ['computers'])
-    se.addPage(['Smalltalk', 'programming', 'computers'])
+    # queryOne = Query(Nmax, ['Smalltalk', 'computers'])
+    # queryTwo = Query(Nmax, ['Smalltalk', 'programming'])
+    # queryThree = Query(Nmax, ['computers'])
+    # se.addPage(['Smalltalk', 'programming', 'computers'])
     #se.printStorage()
-    se.addPage(['COBOL', 'programming'])
+    # se.addPage(['COBOL', 'programming'])
     #se.addPage(['COBOL', 'programming'])
-    se.addPage(['COBOL', 'computers'])
-    se.printStorage()
-    se.find(['Smalltalk', 'computers'])
+    # se.addPage(['COBOL', 'computers'])
+    # se.printStorage()
+    # se.find(['Smalltalk', 'computers'])
     #qManager = QueryManager()
     #qManager.addQuery(queryOne)
 

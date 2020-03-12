@@ -1,0 +1,8 @@
+P Smalltalk programming computers 
+P computers programming
+P computers Smalltalk
+P programming
+Q Smalltalk
+Q programming
+Q Smalltalk programming 
+E
