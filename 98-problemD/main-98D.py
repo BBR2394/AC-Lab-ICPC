@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:32:07
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-03-05 09:47:31
+# @Last Modified time: 2020-03-19 09:59:08
 
 import sys
 
@@ -53,7 +53,7 @@ class Query:
 # 	def addQuery(self, aQuery):
 # 		self.queryList.append(aQuery)
 
-
+# This object take everything about the pages storage
 class SearchEngine:
 	keyword = []
 	maxKW = 0
@@ -85,13 +85,23 @@ class SearchEngine:
 			currentWeight -= 1
 		self.storageList.append(tempStorageList)
 
+	def getKey(self, item):
+		return item[1]
+
+	def orderDictionary(self, dico):
+		print("in orderDictionary")
+		tpls_dico = list(dico.items())
+		tpls_sorted = sorted(tpls_dico, key=self.getKey, reverse=True)
+		return tpls_sorted
+
+	#by sending a query, the ouptu is the pages result for this query
 	#aQuery juste la liste des mots
 	def find(self, aQuery):
 		resPerPages = {}
 		for i in range(len(self.storageList)):
 			resPerPages[i] = 0
-		# print("dico resultats = ", resPerPages)
-		# print("here i will find the pages for the query")
+		print("dico resultats = ", resPerPages)
+		print("here i will find the pages for the query")
 		currentWeight = self.maxKW
 		for q in aQuery:
 			for i in range(len(self.storageList)):
@@ -101,12 +111,10 @@ class SearchEngine:
 						# print(j.getKeyword() , " et ", q, "  sont egaux et donne en poids ", resPerPages[i])
 			currentWeight = self.maxKW - 1
 
-		# print("dico a la fin resultats = ", resPerPages)
-		resPerPages = sorted(resPerPages.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
-		# print("dico a la fin resultats = ", resPerPages)
-		dicoFromLastQuery = resPerPages
-		return resPerPages
-
+		resSorted = self.orderDictionary(resPerPages)
+		dicoFromLastQuery = resSorted
+		print("le dico en tuples : ", resSorted)
+		return resSorted
 
 #def getInputInList():
 
@@ -149,6 +157,10 @@ def printResult(result):
 				print("P" + str(j[0]+1), end=" ")
 		print(end="\n")
 
+# def printResultTupples(result):
+# 	print("les Resultats !")
+# 	for i in range(len(result)):
+
 def main():
     print("Here is where the magik happened 98D")
     inputData = []
@@ -165,6 +177,7 @@ def main():
     # se.printStorage()
     for i in queryList:
     	dicoList.append(se.find(i))
+
     print("dico list : ", dicoList)
 
     printResult(dicoList)
