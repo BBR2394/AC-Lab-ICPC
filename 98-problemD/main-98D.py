@@ -2,11 +2,9 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:32:07
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-03-19 11:45:13
+# @Last Modified time: 2020-03-19 11:50:17
 
 import sys
-
-Nmax = 5
 
 class Storage:
 	keyword = ""
@@ -54,7 +52,6 @@ class SearchEngine:
 	dicoFromLastQuery = {}
 
 	def __init__(self, maxKeyWord):
-		#lstKeyword = lstKeyword[:]
 		self.maxKW = maxKeyWord
 
 	def printStorage(self):
@@ -65,7 +62,7 @@ class SearchEngine:
 				print("un element : ", j.getInformation())
 
 	def addPage(self, keywordLst):
-		currentWeight = Nmax
+		currentWeight = self.maxKW
 		# print("here i am going to create and add a new page")
 		tempStorageList = []
 		for i in keywordLst:
@@ -141,19 +138,20 @@ def printResult(result):
 
 
 def main():
-    inputData = []
-    dicoList = []
-    se = SearchEngine(Nmax)
-    for line in sys.stdin:
-    	if (line[0] == 'E'):
-    		break
-    	inputData.append(line)
-    queryList = storeInputData(inputData, se)
+	Nmax = 5
+	inputData = []
+	dicoList = []
+	se = SearchEngine(Nmax)
+	for line in sys.stdin:
+		if (line[0] == 'E'):
+			break
+		inputData.append(line)
+	queryList = storeInputData(inputData, se)
     # se.printStorage()
-    for i in queryList:
-    	dicoList.append(se.find(i))
-    printResult(dicoList)
-    return 0
+	for i in queryList:
+		dicoList.append(se.find(i))
+	printResult(dicoList)
+	return 0
 
 if __name__=="__main__":       
     main() 
