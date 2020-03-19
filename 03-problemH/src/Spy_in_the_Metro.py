@@ -152,7 +152,7 @@ def lire_graphe():
     return graphes
 
 
-def dijkstra(graphe):
+def parcour(graphe):
     delaiFinal = 0
     heureCourante = graphe.time
     station = graphe.ladj[graphe.ordre - 1]
@@ -191,6 +191,6 @@ if __name__ == "__main__":
             except:
                 print("Case Number " + str(nbGraphes) + " : impossible")
             else:
-                print("Case Number " + str(nbGraphes) + " : " + str(dijkstra(graphe)))
+                print("Case Number " + str(nbGraphes) + " : " + str(parcour(graphe)))
         else:
             print("Case Number " + str(nbGraphes) + " : impossible")
