@@ -187,7 +187,6 @@ if __name__ == "__main__":
         nbGraphes += 1
         if graphe:
             try:
-                #print(graphe)
                 graphe.calcule_horaires()
             except:
                 print("Case Number " + str(nbGraphes) + " : impossible")

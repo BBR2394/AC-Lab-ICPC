@@ -23,3 +23,12 @@ The Algorithms City Metro system has N stations, consecutively numbered from 1 t
  #### Output
  
  For each test case, print a line containing the case number (starting with 1) and an integer representing the total waiting time in the stations for a best schedule, or the word “impossible” in case Maria is unable to make the appointment. Use the format of the sample output. 
+ 
+ ## Solution 
+ 
+ ### Representation du pb :
+ 
+ Nous avons representez le pb sous forme de graphe orienté. 
+ Les stations sont les somets du graphe et les trajet entre deux station les aretes.  
+ Les stations de depart et d'arriver on des specifisité car elle ne sont relier que a un somet  
+ 
