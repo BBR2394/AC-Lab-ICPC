@@ -24,16 +24,22 @@ class Station:
             message += "\nHoraire Terminus :" + str(self.horaireTerminus)
         return message
 
+    """
+    :param horaire: horaire heur qu'il est quand on cherche le prochain train
+    """
     def prochainTrain(self, horaire):
         minDelai = math.inf
         nbKey = 0
         cKey = 0
+        # Il faut géré qu'on soit de nouveau dans le terminal et donc que le type de self.train soit dif
         if type(self.trains) is dict:
             for key in self.trains:
                 cKey += 1
                 for x in range(len(self.trains[key])):
                     if self.trains[key][x] >= horaire and abs(self.trains[key][x] - horaire) <= minDelai:
                         minDelai = horaire - self.trains[key][x]
+                        # Oui je me suis amuser ><
+                        #
                         nbKey = key - 2 if cKey == 1 else key + 2
         else :
             for x in range(len(self.horaireTerminus)):
