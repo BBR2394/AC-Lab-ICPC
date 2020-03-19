@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:32:07
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-03-19 10:02:38
+# @Last Modified time: 2020-03-19 11:45:13
 
 import sys
 
@@ -141,43 +141,19 @@ def printResult(result):
 
 
 def main():
-    # print("Here is where the magik happened 98D")
     inputData = []
     dicoList = []
     se = SearchEngine(Nmax)
     for line in sys.stdin:
-    	#print("une ligne ", end=" : ")
-    	#print(line, end="")
     	if (line[0] == 'E'):
     		break
     	inputData.append(line)
-    # print(inputData)
     queryList = storeInputData(inputData, se)
     # se.printStorage()
     for i in queryList:
     	dicoList.append(se.find(i))
-
-    # print("dico list : ", dicoList)
-
     printResult(dicoList)
     return 0
-    # queryOne = Query(Nmax, ['Smalltalk', 'computers'])
-    # queryTwo = Query(Nmax, ['Smalltalk', 'programming'])
-    # queryThree = Query(Nmax, ['computers'])
-    # se.addPage(['Smalltalk', 'programming', 'computers'])
-    #se.printStorage()
-    # se.addPage(['COBOL', 'programming'])
-    #se.addPage(['COBOL', 'programming'])
-    # se.addPage(['COBOL', 'computers'])
-    # se.printStorage()
-    # se.find(['Smalltalk', 'computers'])
-    #qManager = QueryManager()
-    #qManager.addQuery(queryOne)
 
-
-main()
-# print(sys.argv)
-#print(sys.stdin.read(1))
-
-# if __name__=="__main__":       
-#     main() 
+if __name__=="__main__":       
+    main() 
