@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:32:07
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-03-19 09:59:08
+# @Last Modified time: 2020-03-19 10:02:38
 
 import sys
 
@@ -44,14 +44,6 @@ class Query:
 			self.keywordToFindLst.append(Storage(currentWeight, i))
 			currentWeight -= 1
 
-# class QueryManager:
-# 	queryList = []
-
-# 	def __init__(self):
-# 		print("don't be evil")
-
-# 	def addQuery(self, aQuery):
-# 		self.queryList.append(aQuery)
 
 # This object take everything about the pages storage
 class SearchEngine:
@@ -89,7 +81,7 @@ class SearchEngine:
 		return item[1]
 
 	def orderDictionary(self, dico):
-		print("in orderDictionary")
+		# print("in orderDictionary")
 		tpls_dico = list(dico.items())
 		tpls_sorted = sorted(tpls_dico, key=self.getKey, reverse=True)
 		return tpls_sorted
@@ -100,8 +92,8 @@ class SearchEngine:
 		resPerPages = {}
 		for i in range(len(self.storageList)):
 			resPerPages[i] = 0
-		print("dico resultats = ", resPerPages)
-		print("here i will find the pages for the query")
+		# print("dico resultats = ", resPerPages)
+		# print("here i will find the pages for the query")
 		currentWeight = self.maxKW
 		for q in aQuery:
 			for i in range(len(self.storageList)):
@@ -113,24 +105,14 @@ class SearchEngine:
 
 		resSorted = self.orderDictionary(resPerPages)
 		dicoFromLastQuery = resSorted
-		print("le dico en tuples : ", resSorted)
+		#print("le dico en tuples : ", resSorted)
 		return resSorted
-
-#def getInputInList():
-
-# def createList(line):
-# 	ret = []
-# 	temp = line.split()
-# 	temp.pop(0)
-# 	print("in create list ")
-# 	print(temp)
-# 	return temp
 
 def storeInputData(inputDt, searchEngn):
 	allInput = []
 	aLine = []
 	queryInput = []
-	print("here i'll get the input data")
+	#print("here i'll get the input data")
 	for i in inputDt:
 		#print(i, end="")
 		aLine = i.split()
@@ -149,7 +131,7 @@ def storeInputData(inputDt, searchEngn):
 	return queryInput
 
 def printResult(result):
-	print("les Resultats !")
+	# print("les Resultats !")
 	for i in range(len(result)):
 		print("Q" + str(i+1), end=" : ")
 		for j in result[i]:
@@ -157,12 +139,9 @@ def printResult(result):
 				print("P" + str(j[0]+1), end=" ")
 		print(end="\n")
 
-# def printResultTupples(result):
-# 	print("les Resultats !")
-# 	for i in range(len(result)):
 
 def main():
-    print("Here is where the magik happened 98D")
+    # print("Here is where the magik happened 98D")
     inputData = []
     dicoList = []
     se = SearchEngine(Nmax)
@@ -178,7 +157,7 @@ def main():
     for i in queryList:
     	dicoList.append(se.find(i))
 
-    print("dico list : ", dicoList)
+    # print("dico list : ", dicoList)
 
     printResult(dicoList)
     return 0
