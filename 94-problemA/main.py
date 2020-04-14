@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-03-02 15:16:18
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-04-14 11:50:17
+# @Last Modified time: 2020-04-14 12:01:27
 
 #i am not decided yet. do it in C++ or Python ^^
 
@@ -44,7 +44,7 @@ class Book:
 	def __gt__(self, other):
 		print("dans la method a surcharger")
 
-	def __ge__(self.other):
+	def __ge__(self, other):
 		print("dans la method a surcharger")
 
 
