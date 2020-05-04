@@ -1,30 +1,14 @@
 
-import time
-INF = 1 << 31
+def AireMinimale(Dimension,coordonnée):
 
-def solving_problem(par):
-    def execute(curDist, curGas, curCost):
-        
-		
-        if curCost > minCost[0] or curGas < 0.0:
-            return False
+    if Dimension <3 :
+        return False
 
-        if distFinal - curDist <= curGas * mpg:
-            minCost[0] = min(minCost[0], curCost)
-            return True
+    else:
+        if Dimension == 3 :
 
-        dest_reached = False
-        for s in stations:
-            if s[0] <= curDist or s[0] - curDist > curGas * mpg:
-                continue
-            lastGasStation = (s[0] - curDist) / mpg
-            step_road = execute(s[0], curGas - lastGasStation, curCost)
-            if not step_road or curGas - lastGasStation <= capacity / 2.0:
-                second_step_road = execute(s[0], capacity, curCost + round((
-                    capacity - (curGas - lastGasStation)) * s[1]) + 200)
-            if step_road or second_step_road:
-                dest_reached = True
-        return dest_reached
+
+
 
     distFinal, capacity, mpg, gasPrice, N, stations = par
     stations.sort()
