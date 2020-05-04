@@ -1,63 +1,81 @@
-def multiply(a, b, x, y):
-    return x * (a + b) + a * y, a * x + b * y
+def fib_pair(n):
+    tab = [1, 1]
+    for c in range(n - 1):
+        suivant = tab[1] + tab[0]
+        tab[0] = tab[1]
+        tab[1] = suivant
+    return tab[1]
 
 
-def square(a, b):
-    a2 = a * a
-    b2 = b * b
-    ab = a * b
-    return a2 + (ab << 1), a2 + b2
+def fib_inpair(n):
+    tab = [1, 3]
+    for c in range(n - 2):
+        suivant = tab[1] + tab[0]
+        tab[0] = tab[1]
+        tab[1] = suivant
+    return tab[1]
 
+def fib_autre(n):
+    tab = [1, 1]
+    compt = 0
+    for c in range(n):
+        compt += 1
+        suivant = tab[1] + tab[0]
+        tab[0] = tab[1]
+        tab[1] = suivant
+        if compt % 2 == 1 :
+            tab[1] += 1
+    return tab[1]
 
-def power(a, b, m):
-    if m == 0:
-        return (0, 1)
-    elif m == 1:
-        return (a, b)
-    else:
-        x, y = a, b
-        n = 2
-        while n <= m:
-            # repeated square until n = 2^q > m
-            x, y = square(x, y)
-            n = n * 2
-        # add on the remainder
-        a, b = power(a, b, m - n // 2)
-        return multiply(x, y, a, b)
-
-
-def implicit_fib(n):
-    a, b = power(1, 0, n)
-    return a
-
-
-def suiteAntoine(param):
-    pass
+def fib_sepeciale(n):
+    tab = [1, 3]
+    compt = 0
+    for c in range(n - 2):
+        compt += 1
+        suivant = tab[1] + tab[0]
+        tab[0] = tab[1]
+        tab[1] = suivant
+        if compt % 2 == 0 :
+            tab[1] += 1
+    return tab[1]
 
 
 def fib(n, schema):
     tab = ['0', '1']
 
-    position = 0
+    position = 1
     while schema not in tab[1]:
         suivant = tab[1] + tab[0]
         tab[0] = tab[1]
         tab[1] = suivant
         position += 1
 
-    #suivant = tab[1] + tab[0]
+    suivant = tab[1] + tab[0]
 
-    if position % 2 == 1:
-        f = implicit_fib(n - position)
-    else:
-        if schema == suivant:
-            f = implicit_fib(n - position + len(suivant.split(schema)))/2
+    if tab[1] != schema :
+        if len(suivant)%2 != 0:
+            return fib_inpair(n - position)
         else:
-            f = implicit_fib(n - position + len(suivant.split(schema))) - 1
-    return f
+            return fib_autre(n - position)
+    else :
+        if len(tab[1]) % 2 != 0:
+            return fib_sepeciale(n - position)
+        else:
+            return fib_pair(n - position)
+
+    # if len(schema) % 2 == 0:
+    #     if len(tab[1]) % 2 == 0:
+    #         if tab[1] != schema :
+    #             return fib_autre(n - position)
+    #         else :
+    #             return fib_pair(n - position)
+    #     else :
+    #         return fib_inpair(n - position)
+    # else:
+    #     return fib_sepeciale(n - position)
 
 
 if __name__ == '__main__':
-    n = 6
-    schema = '01'
+    n = 7
+    schema = '10'
     print(fib(n, schema))
