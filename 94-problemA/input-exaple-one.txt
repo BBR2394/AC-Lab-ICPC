@@ -1,5 +1,5 @@
-"The Canterbury Tales" by Chaucer, G.
 "Algorithms" by Sedgewick, R.
+"The Canterbury Tales" by Chaucer, G.
 "The C Programming Language" by Kernighan, B. and Ritchie, D.
 END
 BORROW "Algorithms"
