@@ -1,5 +1,6 @@
 
 def AireMinimale(Dimension,coordonnée):
+    Aire = 0;
     liste_coordonnée =[];
     fichier = open("test.txt", "r");
 
@@ -12,15 +13,16 @@ def AireMinimale(Dimension,coordonnée):
     print(d);
 
     if Dimension ==3 :
-        return False
+
 
     else:
-        if Dimension == 4 :
+
+    if Dimension == 4 :
 
 
-def Distance2point(p1,p2):
+def Distance2point(x1,y1,x2,y2):
 
-    return ()
+    return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 
 def AireRectangle(longueur,largeur):
 
