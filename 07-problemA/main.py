@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-05-04 10:45:25
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-05-04 11:50:01
+# @Last Modified time: 2020-05-05 12:54:43
 
 import sys
 
@@ -11,6 +11,17 @@ def extractData(strblood):
 		return ["?", "?"]
 	else:
 		return [strblood[0], strblood[1]]
+
+def getChildBlood(pOne, pTwo):
+	bloodCorespondance = {'AA': 'A', 'AB': 'AB', 'AO': 'A', 'BA': 'AB', 'BB': 'B', 'BO': 'B', 'OA': 'A', 'OB': 'B', 'OO': 'O'}
+	return bloodCorespondance[pOne+pTwo]
+
+def getRhesus(pOne, pTwo):
+	rhesusCorespondance = {'++' : '+', '+-': '+', '-+': '+', '--': '-'}
+	return rhesusCorespondance[pOne+pTwo]
+
+def findBloodChild(pOneB, pOneR, pTwoB, pTwoR):
+	return ""
 
 def getAllBlood(inputBlood):
 	parentOneBlood = ""
@@ -30,6 +41,8 @@ def getAllBlood(inputBlood):
 	res = extractData(listBlood[2])
 	childBlood = res[0]
 	childRhesus = res[1]
+	if childBlood = '?':
+		findBloodChild(parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus)
 	print("les données : ", parentOneBlood, " ", parentOneRhesus, " ", parentTwoBlood, " ", parentTwoRhesus, " ", childBlood, " ", childRhesus)
 
 def main():
