@@ -2,3 +2,4 @@
 .idea/
 2000-problemC/.gitignore
 venv
+12-problemeD/src/__pycache__/
