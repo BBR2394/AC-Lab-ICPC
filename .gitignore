@@ -1,3 +1,5 @@
 
 .idea/
 venv
+12-problemeD/src/.pytest_cache
+12-problemeD/src/__pycache__/
