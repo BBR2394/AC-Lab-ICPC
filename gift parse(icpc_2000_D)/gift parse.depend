@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1589191809 source:c:\users\kenga2\documents\gift parse\main.cpp
+	<iostream>
+	<fstream>
+	<math.h>
+
