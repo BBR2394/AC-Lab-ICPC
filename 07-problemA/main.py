@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-05-04 10:45:25
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-05-12 11:53:33
+# @Last Modified time: 2020-05-12 12:18:45
 
 import sys
 
@@ -145,7 +145,21 @@ def getAllPossible(lst):
 	#print("a la fin de get all possible : ", finalRes)
 	return finalRes
 
-def getAllBlood(inputBlood):
+def printCorectlyResults(casenb, finalRes, parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus, childBlood, childRhesus):
+	if childBlood == '?':
+		print("Case ", casenb, ":", parentOneBlood, parentOneRhesus, " ", parentTwoBlood, parentTwoRhesus, "{", end="")
+		for i in finalRes:
+			print(i, ',', end="")
+		print("}")
+	else:
+		if parentOneBlood == "?":
+			print("Case ", casenb, ":", finalRes,  " ", parentTwoBlood, parentTwoRhesus, " ", childBlood, childRhesus)
+		else:
+			print("Case ", casenb, ":", parentOneBlood, parentOneRhesus, " ", finalRes, " ", childBlood, childRhesus)
+
+
+
+def getAllBlood(inputBlood, nb):
 	parentOneBlood = ""
 	parentOneRhesus = ""
 	parentTwoBlood = ""
@@ -181,10 +195,11 @@ def getAllBlood(inputBlood):
 		#print("pour recherche le parent")
 		#print("la je dois cherche le parent ...")
 		secondResult = findParentBlood(parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus, childBlood, childRhesus)
-	print("a la fin")
-	print(secondResult)
+	#print("a la fin")
+	#print(secondResult)
 	secondResult.sort()
-	print(secondResult)
+	#print(secondResult)
+	printCorectlyResults(nb, secondResult, parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus, childBlood, childRhesus)
 	return True
 
 def main():
@@ -197,7 +212,7 @@ def main():
 	ret = True
 	i = 0
 	while ret:
-		ret = getAllBlood(allInput[i])
+		ret = getAllBlood(allInput[i], i)
 		i += 1
 
 if __name__=="__main__":
