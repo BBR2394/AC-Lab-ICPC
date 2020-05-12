@@ -2,22 +2,22 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-05-04 10:45:25
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-05-11 11:36:18
+# @Last Modified time: 2020-05-12 11:53:33
 
 import sys
 
 def extractData(strblood):
-	print("dans extract data : ", strblood, " taille ", len(strblood))
+	#print("dans extract data : ", strblood, " taille ", len(strblood))
 	first = []
 	if strblood[0] == "?":
 		return ["?", "?"]
 	else:
 		if len(strblood) == 3:
 			first = [strblood[0]+strblood[1], strblood[2]]
-			print("first = ", first)
+			#print("first = ", first)
 		elif len(strblood) == 2:
 			first = [strblood[0], strblood[1]]
-			print("first = ", first)
+			#print("first = ", first)
 		return first
 		#return [strblood[0], strblood[1]]
 
@@ -38,25 +38,95 @@ def getChildBlood(pOne, pTwo):
 							}
 	return bloodCorespondance[pOne+pTwo]
 
-def getPossibleSecondParent(childB):
+#according to the blood type, give possible allele du chromosome de l'enfant
+def getAllele(childB):
 	bloodCorespondance = {
 	'O': [['O', 'O']],
 	'A': [['A', 'A'], ['O', 'A'], ['A', 'O']],
 	'B': [['B', 'B'], ['O', 'B'], ['B', 'O']],
 	'AB': [['A', 'B'], ['B', 'A']]
 	}
+	return bloodCorespondance[childB]
+
+
+def getPossibleSecondParent(childB):
+	bloodCorespondance = {
+	'O': [['O', 'O'], ['O', 'A'], ['A', 'O'], ['O', 'B'], ['B', 'O']],
+	'A': [['A', 'A'], ['O', 'A'], ['A', 'O'], ['O', 'B'], ['B', 'O']],
+	'B': [['B', 'B'], ['O', 'B'], ['B', 'O'], ['O', 'A'], ['A', 'O']],
+	'AB': [['A', 'B'], ['B', 'A']]
+	}
+	return bloodCorespondance[childB]
 
 def getRhesus(pOne, pTwo):
 	rhesusCorespondance = {'++' : ['+'], '+-': ['+', '-'], '-+': ['+', '-'], '--': ['-']}
 	return rhesusCorespondance[pOne+pTwo]
 
 def findBloodChild(pOneB, pOneR, pTwoB, pTwoR):
-	print("dans find blood child : ", pOneB, " ", pOneR, " ", pTwoB, " ", pTwoR)
+	#print("dans find blood child : ", pOneB, " ", pOneR, " ", pTwoB, " ", pTwoR)
 	return [getChildBlood(pOneB, pTwoB), getRhesus(pOneR, pTwoR)]
 
+def cleanResult(res, pBlood):
+	c = 0
+	for i in res:
+		c = len(i)
+		if c >1:
+			c = i.count('O')
+			if c > 1 and pBlood == 'AB':
+				#print("impossible")
+				raise("impossible")
+			i.pop(i.index('O'))
+	#print("apres netoyage 1 : ", res, " parent blood : ", pBlood)
+	return res
+
+def removeDoublon(res):
+	final = []
+	for i in res:
+		if final.count(i[0]) == 0:
+			final.append(i[0])
+	#print("AU FINAL DU FINAL : ", final)
+	return final
+
+def addRhesus(fres):
+	final = []
+	for i in fres:
+		final.append(i+'+')
+		final.append(i+'-')
+	#print("avec rhesus :", final)
+	return final
+
+#finde the blood possible for the second parent
 def findParentBlood(pOneB, pOneR, pTwoB, pTwoR, childBlood, childRhesus):
-	print("$>dans findParentBlood : ", pOneB, " ", pOneR, " ", pTwoB, " ", pTwoR)
-	return []
+	res = []
+	finalRes = []
+	#print("$>dans findParentBlood : ", pOneB, " ", pOneR, " ", pTwoB, " ", pTwoR, " ", childBlood, " ", childRhesus)
+	#print("la ppopssibilité du deuxieme parent : ", getPossibleSecondParent(childBlood))
+	childPossibility = getPossibleSecondParent(childBlood)
+	try:
+		if pOneB == '?':
+			#parentAllele = getPossibleSecondParent(pTwoB)
+			#print("parent Two allele : ", parentAllele)
+			for i in childPossibility:
+				#print("$>i:", i)
+				if i.count(pTwoB):
+					i.pop(i.index(pTwoB))
+			#print("new possible parent : ", childPossibility)
+			res = cleanResult(childPossibility, pTwoB)
+		else:
+			#parentAllele = getPossibleSecondParent(pOneB)
+			#print("parent One allele : ", parentAllele)
+			for i in childPossibility:
+				#print("$>i:", i)
+				if i.count(pOneB):
+					i.pop(i.index(pOneB))
+			#print("new possible parent : ", childPossibility)
+			res = cleanResult(childPossibility, pOneB)
+		finalRes = removeDoublon(res)
+		finalRes = addRhesus(finalRes)
+	except: 
+		#print("excepption retourné")
+		return ["IMPOSSIBLE"]
+	return finalRes
 
 def checkEnd(lst):
 	if lst[0] == 'E':
@@ -67,12 +137,13 @@ def checkEnd(lst):
 		return False
 
 def getAllPossible(lst):
-	print("get all possible ")
+	#print("get all possible ")
 	finalRes = []
 	for i in lst[0]:
 		for j in lst[1]:
 			finalRes.append(i+j)
-	print("a la fin de get all possible : ", finalRes)
+	#print("a la fin de get all possible : ", finalRes)
+	return finalRes
 
 def getAllBlood(inputBlood):
 	parentOneBlood = ""
@@ -81,9 +152,11 @@ def getAllBlood(inputBlood):
 	parentTwoRhesus = ""
 	childBlood = ""
 	childRhesus = ""
-
+	#print("input blood, ", inputBlood)
+	inputBlood = inputBlood.replace('\n', ' ')
+	#print("input blood, ", inputBlood)
 	listBlood = inputBlood.split(" ")
-	print("la liste : ", listBlood)
+	#print("la liste : ", listBlood)
 	if checkEnd(listBlood):
 		return False
 	res = extractData(listBlood[0])
@@ -99,22 +172,28 @@ def getAllBlood(inputBlood):
 	childRhesus = res[1]
 
 	if childBlood == '?':
+		#print("pour recherche l'enfant")
 		firstResult = findBloodChild(parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus)
-		print("le resultat est : ", firstResult)
+		#print("le resultat est : ", firstResult)
 		secondResult = getAllPossible(firstResult)
-		print("finally : ", secondResult)
+		#print("finally : ", secondResult)
 	if parentOneBlood == '?' or parentTwoBlood == '?':
-		print("la je dois cherche le parent ...")
-		findParentBlood(parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus, childBlood, childRhesus)
+		#print("pour recherche le parent")
+		#print("la je dois cherche le parent ...")
+		secondResult = findParentBlood(parentOneBlood, parentOneRhesus, parentTwoBlood, parentTwoRhesus, childBlood, childRhesus)
+	print("a la fin")
+	print(secondResult)
+	secondResult.sort()
+	print(secondResult)
 	return True
 
 def main():
 	allInput = []
-	print("here is where the magik happen")
+	#print("here is where the magik happen")
 	for line in sys.stdin:
-		print("en all input: ", line, end="")
+		#print("en all input: ", line, end="")
 		allInput.append(line)
-	print("\n")
+	#print("\n")
 	ret = True
 	i = 0
 	while ret:
