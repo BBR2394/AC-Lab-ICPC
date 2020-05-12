@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2020-05-04 10:45:25
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2020-05-12 12:18:45
+# @Last Modified time: 2020-05-12 12:26:13
 
 import sys
 
@@ -95,6 +95,9 @@ def addRhesus(fres):
 	#print("avec rhesus :", final)
 	return final
 
+#en fait pour le parent je me suis compliqué la vie pour rien car en fait le second parent peut etre de tout les groupe sangunin et ce 
+#independament de l'enfant, le seul cas ou il y a des exceptions c'est sir l'un des parents est AB, ou la l'enfant et forcement A ou B et jamais O
+#mais aussi seulement si l'enfant est O, et le premier parent A ou B ou O, le second peut etre tout sauf AB
 #finde the blood possible for the second parent
 def findParentBlood(pOneB, pOneR, pTwoB, pTwoR, childBlood, childRhesus):
 	res = []
@@ -156,7 +159,6 @@ def printCorectlyResults(casenb, finalRes, parentOneBlood, parentOneRhesus, pare
 			print("Case ", casenb, ":", finalRes,  " ", parentTwoBlood, parentTwoRhesus, " ", childBlood, childRhesus)
 		else:
 			print("Case ", casenb, ":", parentOneBlood, parentOneRhesus, " ", finalRes, " ", childBlood, childRhesus)
-
 
 
 def getAllBlood(inputBlood, nb):
