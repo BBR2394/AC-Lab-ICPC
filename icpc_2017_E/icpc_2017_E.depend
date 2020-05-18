@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1589798451 source:c:\users\kenga2\documents\ac-lab-icpc\icpc_2017_e\main.cpp
+	<iostream>
+	<fstream>
+	<math.h>
+

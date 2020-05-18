@@ -1,0 +1,10 @@
+Le problème est de trouver les surfaces minimales et maximales des paquets censé contenir des cadeaux initialisés
+
+Plusieurs facteurs a prendre en compte :
+	- Le nombre de sommet du polygone representant le cadeau dans l'espace;
+	- Le fait que le cadeau soit comprimé ou non dans le paquet;
+	- Savoir que le colis est à l'étroit s'il touche les 4 cotés de l'emballage;
+	- Le paquet doit pouvoir contenir le cadeau ;
+
+Résultat :
+	Avoir l'aire maximale et l'aire minimale pouvant contenir le cadeau
