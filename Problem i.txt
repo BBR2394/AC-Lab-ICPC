@@ -1,5 +1,0 @@
-La première ligne d'entrée contient deux entiers m (1 ≤ m ≤ 500) et n (1 ≤ n ≤ 50), où m est le nombre
-des traductions de lettres et n est le nombre de paires de mots. Chacune des m lignes suivantes contient deux
-lettres a et b séparées par des espaces, indiquant que la lettre a peut être traduite en lettre b. Chaque commande
-paire de lettres (a, b) apparaît au plus une fois. Après cela, il y a n lignes, chacune contenant une paire de mots à vérifier.
-Les traductions et les mots n'utilisent que des lettres minuscules «a» - «z», et chaque mot contient au moins 1 et au plus 50 lettres
