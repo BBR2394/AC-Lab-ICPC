@@ -1,7 +1,0 @@
-Gift1:
-min_area : 80000
-max_area : 200000
-
-Gift2:
-min_area : 100000
-max_area : 200000
