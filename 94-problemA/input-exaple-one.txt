@@ -1,0 +1,12 @@
+"Algorithms" by Sedgewick, R.
+"The Canterbury Tales" by Chaucer, G.
+"The C Programming Language" by Kernighan, B. and Ritchie, D.
+"La Bible" by Jesus
+END
+BORROW "Algorithms"
+BORROW "The C Programming Language"
+BORROW "La Bible"
+RETURN "Algorithms"
+RETURN "The C Programming Language"
+SHELVE
+END
